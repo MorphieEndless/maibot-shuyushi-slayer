@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "id": "github.morphieendless.shuyushi-slayer",
+  "version": "1.0.0",
+  "name": "属于是猎杀者",
+  "description": "在出站消息发送前按概率随机清除「属于是 / 了属于是」口癖，打断自我强化的复读回路。",
+  "author": {
+    "name": "MorphieEndless",
+    "url": "https://github.com/MorphieEndless"
+  },
+  "license": "MIT",
+  "urls": {
+    "repository": "https://github.com/MorphieEndless/maibot-shuyushi-slayer",
+    "homepage": "https://github.com/MorphieEndless/maibot-shuyushi-slayer",
+    "documentation": "https://github.com/MorphieEndless/maibot-shuyushi-slayer/blob/main/README.md",
+    "issues": "https://github.com/MorphieEndless/maibot-shuyushi-slayer/issues"
+  },
+  "host_application": {
+    "min_version": "1.0.0",
+    "max_version": "3.99.99"
+  },
+  "sdk": {
+    "min_version": "2.5.1",
+    "max_version": "2.99.99"
+  },
+  "plugin_type": "extension",
+  "dependencies": [],
+  "capabilities": [],
+  "i18n": {
+    "default_locale": "zh-CN",
+    "supported_locales": ["zh-CN"]
+  },
+  "display": {
+    "icon": {
+      "type": "lucide",
+      "value": "scissors"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+[plugin]
+config_version = "1.0.0"
+enabled = true
+
+[slayer]
+enabled = true
+kill_ratio = 0.7
+patterns = ["了?属于是"]
+cleanup_text = true
+guard_empty = true
+max_kills_per_message = 0
+sync_processed_text = true
+dry_run = false
+log_kills = true
+only_groups = []
+skip_groups = []
