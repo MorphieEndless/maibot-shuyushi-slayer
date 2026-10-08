@@ -26,6 +26,9 @@ MaiBot 会把 bot 自己的历史回复当作 few-shot 上下文回灌给模型�
   不是 bot 自己的口癖）。
 - 两个文本视图共用一张「按出现序号惰性生成」的随机判定表，保证发出去的文本
   和落库的文本在这批位置上被清理得一致。
+- 改写结果通过返回值 ``modified_kwargs`` 交回宿主。插件运行在独立进程里，
+  宿主侧先把消息 ``serialize`` 再传进来，就地修改入参无法跨进程生效，
+  因此这里只构造新对象、不做原地改写。
 - 任何异常都被吞掉并记日志，绝不阻塞发送。
 """
 
@@ -408,7 +411,11 @@ class YushuyuSlayerPlugin(MaiBotPlugin):
             )
             return None
 
-        message["raw_message"] = new_components
+        # 构造改写后的副本，不改动传入的 message / kwargs。
+        # 宿主把消息 serialize 后才交给插件，插件又在独立进程里运行，
+        # 就地修改对象不会跨进程传回去，唯一生效的通道是返回的 modified_kwargs。
+        modified_message = dict(message)
+        modified_message["raw_message"] = new_components
 
         if cfg.sync_processed_text:
             processed = message.get("processed_plain_text")
@@ -423,9 +430,10 @@ class YushuyuSlayerPlugin(MaiBotPlugin):
                     cleanup=cfg.cleanup_text,
                 )
                 if processed_killed > 0:
-                    message["processed_plain_text"] = new_processed
+                    modified_message["processed_plain_text"] = new_processed
 
-        kwargs["message"] = message
+        modified_kwargs = dict(kwargs)
+        modified_kwargs["message"] = modified_message
 
         self._total_kills += killed
         self._total_messages += 1
@@ -436,7 +444,7 @@ class YushuyuSlayerPlugin(MaiBotPlugin):
                 f"| 改后: {_joined_text(new_components)[:120]}"
             )
 
-        return {"action": "continue", "modified_kwargs": kwargs}
+        return {"action": "continue", "modified_kwargs": modified_kwargs}
 
 
 def create_plugin() -> YushuyuSlayerPlugin:

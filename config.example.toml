@@ -1,3 +1,9 @@
+# 属于是猎杀者 · 默认配置示例
+#
+# 本文件仅作参考，请不要直接修改它。
+# 插件首次运行时，Runner 会依据 plugin.py 里的 config_model 自动生成 config.toml，
+# 实际生效的是那一份。各参数的详细说明见 README。
+
 [plugin]
 config_version = "1.0.0"
 enabled = true

@@ -1,8 +1,10 @@
+# 运行时配置由 Runner 依据 config_model 生成，不提交
+config.toml
+config_back/
+*.backup.*
+
 __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
 venv/
-
-# 各实例自己的运行时配置，不要提交
-config.local.toml

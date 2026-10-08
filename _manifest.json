@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "id": "github.morphieendless.shuyushi-slayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "属于是猎杀者",
   "description": "在出站消息发送前按概率随机清除「属于是 / 了属于是」口癖，打断自我强化的复读回路。",
   "author": {
